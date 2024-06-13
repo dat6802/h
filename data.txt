@@ -1,0 +1,25 @@
+private static string str = @"Data Source=ADMIN\TUNG123;Initial Catalog=qlsinhvien1;Integrated Security=True";
+public static SqlConnection taoketnoi()
+{
+    return new SqlConnection(str);
+}
+public static DataTable GetDataTable(string sql)
+{
+    SqlConnection dg= taoketnoi(); 
+    dg.Open();
+    SqlDataAdapter maybom = new SqlDataAdapter(sql,dg);
+    DataTable thungchua = new DataTable();
+    maybom.Fill(thungchua);
+    dg.Close();
+    maybom.Dispose();
+    return thungchua;
+}
+public static void addeditdelete(string sql)
+{
+    SqlConnection dg = taoketnoi();
+    dg.Open();
+    SqlCommand cmd = new SqlCommand(sql,dg);
+    cmd.ExecuteNonQuery();
+    dg.Close();
+
+} 
